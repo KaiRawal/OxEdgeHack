@@ -1,0 +1,84 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 <!doctype html>\
+<html>\
+<head>\
+  <meta charset="utf-8"/>\
+  <title>Text Color Inference Demo</title>\
+  <style>\
+    body \{ font-family: system-ui, Arial; padding: 24px; max-width: 720px; \}\
+    .preview \{ margin-top: 18px; font-size: 20px; padding: 12px; border-radius: 8px; \}\
+    label \{ display: block; margin-top: 12px; \}\
+    input[type="range"] \{ width: 100%; \}\
+    .score-badge \{ display:inline-block; min-width:56px; text-align:center; padding:6px 10px; border-radius:6px; margin-left:8px; color:#fff; font-weight:600;\}\
+  </style>\
+</head>\
+<body>\
+  <h2>Text Color Inference \'97 demo</h2>\
+\
+  <label>Enter score (0.0 \uc0\u8594  1.0):\
+    <input id="scoreInput" type="range" min="0" max="1" step="0.01" value="0.5">\
+  </label>\
+\
+  <label>Or type numeric score:\
+    <input id="scoreText" type="number" min="0" max="1" step="0.01" value="0.5" style="width:120px">\
+    <button id="applyBtn">Apply</button>\
+  </label>\
+\
+  <div class="preview" id="preview" contenteditable="true">This is the chatbot answer. Edit this text and the color will update based on the score.</div>\
+\
+  <div style="margin-top:12px;">\
+    <span>Score:</span>\
+    <span class="score-badge" id="scoreBadge">0.50</span>\
+  </div>\
+\
+  <script>\
+    // HSL interpolation: hue 0 (red) -> 120 (green)\
+    function scoreToHslCss(score, sat=85, light=40) \{\
+      score = Math.max(0, Math.min(1, Number(score) || 0));\
+      const hue = 120 * score; // 0..120\
+      return `hsl($\{hue\}, $\{sat\}%, $\{light\}%)`;\
+    \}\
+\
+    function updateUI(score) \{\
+      const color = scoreToHslCss(score);\
+      const preview = document.getElementById('preview');\
+      preview.style.color = color;\
+      // also set a colored badge background (dark border for contrast)\
+      const badge = document.getElementById('scoreBadge');\
+      badge.textContent = Number(score).toFixed(2);\
+      badge.style.background = color;\
+      // ensure badge text remains readable: pick black/white based on lightness\
+      const lightness = 40; // must match scoreToHslCss light\
+      badge.style.color = (lightness < 50) ? '#fff' : '#000';\
+    \}\
+\
+    const range = document.getElementById('scoreInput');\
+    const text = document.getElementById('scoreText');\
+    const apply = document.getElementById('applyBtn');\
+\
+    range.addEventListener('input', (e) => \{\
+      text.value = e.target.value;\
+      updateUI(e.target.value);\
+    \});\
+\
+    apply.addEventListener('click', () => \{\
+      const v = Number(text.value);\
+      if (isNaN(v) || v < 0 || v > 1) \{ alert('Enter a number between 0 and 1'); return; \}\
+      range.value = v;\
+      updateUI(v);\
+    \});\
+\
+    // initialize\
+    updateUI(range.value);\
+  </script>\
+</body>\
+</html>\
+}
