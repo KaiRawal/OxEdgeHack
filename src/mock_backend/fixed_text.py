@@ -6,30 +6,45 @@ Configuration file containing all hardcoded chatbot responses.
 """
 
 # Response mappings - keyword to response
-GREETING_RESPONSE = "Hello! How can I help you today?"
+DYSLEXIA_RESPONSE = "Common Signs of Dyslexia:
+Reading and Writing Difficulties
+Reading and writing very slowly
+Confusing the order of letters in words
+Getting confused by letters that look similar and writing letters the wrong way round (such as "b" and "d")
+Poor or inconsistent spelling
+Processing and Organization:
+Finding it hard to carry out a sequence of directions
+Struggling with planning and organization
+Understanding information when told verbally, but having difficulty with information that's written down
+"
 
-HOW_ARE_YOU_RESPONSE = "I'm doing great! Thanks for asking. I'm a simple chatbot with hardcoded responses."
+DYSPRAXIA_RESPONSE = "Based on NHS information, here are the symptoms of dyspraxia (also known as Developmental Co-ordination Disorder or DCD):
+Main Symptoms in Children
+Problems with movement and coordination are the main symptoms NHS, including:
+Physical Activities:
+Difficulty with playground activities such as hopping, jumping, running, and catching or kicking a ball NHS
+Appearing awkward and clumsy - they may bump into objects, drop things and fall over a lot NHS
+Fine Motor Skills:
+Problems with writing, drawing and using scissors – their handwriting and drawings may appear scribbled and less developed compared to other children their age NHS
+Difficulty getting dressed, doing up buttons and tying shoelaces NHS
+Movement:
+Difficulty keeping still – they may swing or move their arms and legs a lot NHS
+Early Developmental Signs
+Early developmental milestones of crawling, walking, self-feeding and dressing may be delayed in young children with DCD. Drawing, writing and performance in sports are also usually behind what is expected for their age NHS.
+Other Associated Issues
+Some children with DCD have difficulty coordinating the movements required to produce clear speech NHS
+Behaviour problems – often stemming from a child's frustration with their symptoms NHS
+In Adults
+Symptoms of dyspraxia can vary between individuals and may change over time. You may find routine tasks difficult NHS.
+When to Seek Help
+See a GP if you think you may have undiagnosed dyspraxia or problems with your coordination. It's a good idea to keep a diary of your symptoms NHS."
 
-NAME_RESPONSE = "I'm a Simple Chatbot. I don't use any APIs - just hardcoded responses!"
 
-GOODBYE_RESPONSE = "Goodbye! Have a great day!"
-
-HELP_RESPONSE = "I'm a simple chatbot. Try saying 'hello', asking 'how are you', or say 'bye'!"
-
-WEATHER_RESPONSE = "I don't have access to real weather data, but I hope it's nice where you are!"
-
-THANK_YOU_RESPONSE = "You're welcome! Happy to help!"
-
-DEFAULT_RESPONSE = "I'm a simple chatbot with limited responses. Try asking me something else!"
 
 # Keywords for matching (lowercase)
-GREETING_KEYWORDS = ["hello", "hi", "hey"]
-HOW_ARE_YOU_KEYWORDS = ["how are you", "how're you"]
-NAME_KEYWORDS = ["name", "who are you"]
-GOODBYE_KEYWORDS = ["bye", "goodbye", "see you"]
-HELP_KEYWORDS = ["help"]
-WEATHER_KEYWORDS = ["weather"]
-THANK_KEYWORDS = ["thank"]
+DYSLEXIA_KEYWORDS = ["dyslexia"]
+DYSPRAXIA_KEYWORDS = ["dyspraxia"]
+
 
 # Example prompts for the UI
 EXAMPLE_PROMPTS = [
