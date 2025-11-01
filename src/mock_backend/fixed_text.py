@@ -41,7 +41,7 @@ EXAMPLE_PROMPTS = [
 ]
 
 # UI Configuration
-CHATBOT_TITLE = "Simple Hardcoded Chatbot"
-CHATBOT_DESCRIPTION = "A simple chatbot that returns hardcoded responses. No API required!"
+CHATBOT_TITLE = "NHS Chatbot"
+CHATBOT_DESCRIPTION = "Ask any health-related questions."
 
 

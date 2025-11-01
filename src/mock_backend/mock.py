@@ -69,14 +69,25 @@ def chatbot_response(message, history):
     else:
         return DEFAULT_RESPONSE
 
-# Create the Gradio ChatInterface
-demo = gr.ChatInterface(
-    fn=chatbot_response,
-    title=CHATBOT_TITLE,
-    description=CHATBOT_DESCRIPTION,
-    examples=EXAMPLE_PROMPTS,
-    theme=gr.themes.Soft()
-)
+from mock_ui import global_css, header
 
 if __name__ == "__main__":
+
+    with gr.Blocks(
+        title="NHS Chatbot",
+        theme=gr.themes.Soft(),
+        css=global_css()
+    
+    ) as demo:
+        header()
+
+        gr.ChatInterface(
+            fn=chatbot_response,
+            title=CHATBOT_TITLE,
+            #description=CHATBOT_DESCRIPTION,
+            examples=EXAMPLE_PROMPTS,
+            textbox=gr.Textbox(placeholder="Ask me about any health-related questions...")
+            #theme=gr.themes.Soft()
+        )
+
     demo.launch()
