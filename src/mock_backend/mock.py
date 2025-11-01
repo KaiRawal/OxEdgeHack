@@ -3,8 +3,11 @@
 # Save this as chatbot.py (in the same directory as responses.py)
 
 import gradio as gr
+import colorsys
+import html
 from fixed_text import (
     DYSLEXIA_RESPONSE,
+    DYSLEXIA_RESPONSES,
     DYSLEXIA_KEYWORDS,
     DYSPRAXIA_RESPONSE,
     DYSPRAXIA_KEYWORDS,
@@ -14,40 +17,68 @@ from fixed_text import (
 )
 
 keyword_response_map = {
-    tuple(DYSLEXIA_KEYWORDS): DYSLEXIA_RESPONSE,
+    tuple(DYSLEXIA_KEYWORDS): DYSLEXIA_RESPONSES,
     tuple(DYSPRAXIA_KEYWORDS): DYSPRAXIA_RESPONSE,
 }
 
-def chatbot_response(message, history):
-    """
-    Returns a hardcoded response based on the user's message.
-    
-    Args:
-        message: The user's input message
-        history: The chat history (list of [user_message, bot_response] pairs)
-    
-    Returns:
-        A hardcoded response string
-    """
-    message_lower = message.lower()
-    
-    # Map keyword groups to responses for cleaner, extensible logic
+def clamp01(x):
+    try:
+        return max(0.0, min(1.0, float(x)))
+    except Exception:
+        return 0.0
 
+def score_to_hex(score: float) -> str:
+    """Convert [0,1] score to red→green hex colour (HSL hue 0→120)."""
+    s = clamp01(score)
+    hue = (120.0 * s) / 360.0
+    r, g, b = colorsys.hls_to_rgb(hue, 0.40, 0.85)
+    return f'#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}'
+
+def render_coloured_paragraphs(score_dict: dict) -> str:
+    """Render each paragraph with its colour based on score."""
+    blocks = []
+    for para, score in score_dict.items():
+        colour = score_to_hex(score)
+        safe_text = html.escape(str(para))
+        blocks.append(
+            f"<p style='color:{colour}; margin:0 0 12px 0;'>"
+            f"{safe_text}"
+            f"<br><span style='opacity:0.85'>Trust: {clamp01(score):.2f} | Colour: {colour}</span>"
+            f"</p>"
+        )
+    return "<div style='font-family:system-ui,Arial;line-height:1.6;font-size:17px;'>" + "".join(blocks) + "</div>"
+
+def format_response_obj(response) -> str:
+    """If response is a dict paragraph->score, render coloured HTML; otherwise escape text."""
+    print(response)
+    print(type(response))
+    if isinstance(response, dict):
+        return render_coloured_paragraphs(response)
+    # fallback: plain text (escaped)
+    return f"<div style='font-family:system-ui,Arial;font-size:17px'>{html.escape(str(response))}</div>"
+
+def get_response_for_message(message: str) -> str:
+    """
+    Return HTML string for matched response (coloured if dict), otherwise default response.
+    """
+    message_lower = (message or "").lower()
     for keywords, response in keyword_response_map.items():
         if any(keyword in message_lower for keyword in keywords):
-            return response
+            return format_response_obj(response)
+    return format_response_obj(DEFAULT_RESPONSE)
 
-    # Default response
-    return DEFAULT_RESPONSE
+# Replace ChatInterface with Blocks-based UI that shows coloured HTML output
+with gr.Blocks(title=CHATBOT_TITLE) as demo:
+    gr.Markdown(f"### {CHATBOT_TITLE}\n\n{CHATBOT_DESCRIPTION}")
+    inp = gr.Textbox(label="Message", placeholder="Type your message...")
+    out = gr.HTML("<div style='font-family:system-ui,Arial;font-size:17px'>Responses will appear here.</div>")
+    btn = gr.Button("Send")
 
-# Create the Gradio ChatInterface
-demo = gr.ChatInterface(
-    fn=chatbot_response,
-    title=CHATBOT_TITLE,
-    description=CHATBOT_DESCRIPTION,
-    examples=[DYSLEXIA_KEYWORDS, DYSPRAXIA_KEYWORDS],
-    theme=gr.themes.Soft()
-)
+    def on_submit(message):
+        return get_response_for_message(message)
+
+    btn.click(on_submit, inp, out)
+    inp.submit(on_submit, inp, out)
 
 if __name__ == "__main__":
     demo.launch()
