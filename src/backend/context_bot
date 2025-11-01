@@ -1,0 +1,27 @@
+
+
+
+
+
+def chunk(answer):
+    """
+    input : type str
+    output : list of numpy arrays/tensor 
+    
+    """
+
+
+
+
+
+
+def similarity(chunked_answer:list, retrived_emeddings:list):
+
+    sim_dict = {}
+
+    for portion in chunked_answer:
+        for emed in retrived_emeddings:
+            sim = cosine_sim(portion,emed)
+            sim_dict[portion] = sim 
+    
+    return sim_dict
