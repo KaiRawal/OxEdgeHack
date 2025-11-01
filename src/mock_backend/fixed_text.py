@@ -37,27 +37,34 @@ DYSLEXIA_RESPONSE = """<pulling in NHS dyslexia data> Here are some common Signs
 Do your symptoms match these?
 """
 
-# DYSPRAXIA_RESPONSES = {
-#     "<pulling in NHS dyslexia data> Based on NHS information, here are the symptoms of dyspraxia (also known as Developmental Co-ordination Disorder or DCD) in children" : 0.1,
-
-# 1. Problems with movement and coordination are the main symptoms NHS, including:
-# Physical Activities:
-# - Difficulty with playground activities such as hopping, jumping, running, and catching or kicking a ball NHS
-# - Appearing awkward and clumsy - they may bump into objects, drop things and fall over a lot NHS
-# 2. Fine Motor Skills:
-# - Problems with writing, drawing and using scissors – their handwriting and drawings may appear scribbled and less developed compared to other children their age NHS
-# - Difficulty getting dressed, doing up buttons and tying shoelaces NHS
-# 3. Movement:
-# - Difficulty keeping still – they may swing or move their arms and legs a lot NHS
-# - Early Developmental Signs
-# - Early developmental milestones of crawling, walking, self-feeding and dressing may be delayed in young children with DCD. Drawing, writing and performance in sports are also usually behind what is expected for their age NHS.
-# 4. Other Associated Issues
-# - Some children with DCD have difficulty coordinating the movements required to produce clear speech NHS
-# - Behaviour problems – often stemming from a child's frustration with their symptoms NHS
-
-# In Adults, symptoms of dyspraxia can vary between individuals and may change over time. You may find routine tasks difficult.
-# When to Seek Help: See a GP if you think you may have undiagnosed dyspraxia or problems with your coordination. It's a good idea to keep a diary of your symptoms."
-
+DYSPRAXIA_RESPONSES = {
+    "<pulling in NHS dyslexia data> Based on NHS information, here are the symptoms of dyspraxia (also known as Developmental Co-ordination Disorder or DCD) in children" : 0.9,
+"1. Problems with movement and coordination are the main symptoms NHS, including:": 0.5,
+"""Physical Activities:
+- Difficulty with playground activities such as hopping, jumping, running, and catching or kicking a ball NHS
+- Appearing awkward and clumsy - they may bump into objects, drop things and fall over a lot NHS
+""": 0.4,
+"""
+2. Fine Motor Skills:
+- Problems with writing, drawing and using scissors – their handwriting and drawings may appear scribbled and less developed compared to other children their age NHS
+- Difficulty getting dressed, doing up buttons and tying shoelaces NHS
+""": 0.3,
+"""
+3. Movement:
+- Difficulty keeping still – they may swing or move their arms and legs a lot NHS
+- Early Developmental Signs
+- Early developmental milestones of crawling, walking, self-feeding and dressing may be delayed in young children with DCD. Drawing, writing and performance in sports are also usually behind what is expected for their age NHS.
+""": 0.2,
+"""
+4. Other Associated Issues
+- Some children with DCD have difficulty coordinating the movements required to produce clear speech NHS
+- Behaviour problems – often stemming from a child's frustration with their symptoms NHS
+""": 0.1,
+"""
+In Adults, symptoms of dyspraxia can vary between individuals and may change over time. You may find routine tasks difficult.
+When to Seek Help: See a GP if you think you may have undiagnosed dyspraxia or problems with your coordination. It's a good idea to keep a diary of your symptoms."
+""": 0.1,
+}
 
 DYSPRAXIA_RESPONSE = """<pulling in NHS dyslexia data> Based on NHS information, here are the symptoms of dyspraxia (also known as Developmental Co-ordination Disorder or DCD) in children
 1. Problems with movement and coordination are the main symptoms NHS, including:
