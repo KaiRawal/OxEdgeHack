@@ -40,10 +40,65 @@ When to Seek Help
 See a GP if you think you may have undiagnosed dyspraxia or problems with your coordination. It's a good idea to keep a diary of your symptoms NHS."""
 
 
+TRIGGER_RESPONSE = "Based on the NHS information, here's what can trigger depression:
+Life-Changing Events
+Sometimes there's a trigger for depression. Life-changing events can bring it on, such as:
+
+Bereavement
+Losing your job
+Giving birth
+
+Family History
+People with a family history of depression are more likely to experience it themselves.
+No Obvious Reason
+You can also become depressed for no obvious reason - sometimes depression occurs without any clear trigger.
+Important Distinction
+It's worth noting that most people experience feelings of stress, anxiety or low mood during difficult times. A low mood may improve after a short period of time, rather than being a sign of depression. Depression is characterized by feeling persistently sad for weeks or months, rather than just a few days.
+When to Seek Help
+It's important to seek help from a GP if you think you may be depressed. Many people wait a long time before seeking help for depression, but it's best not to delay. The sooner you see a doctor, the sooner you can be on the way to recovery.
+With the right treatment and support, most people with depression can make a full recovery.RetryShow does depression present in childrenI don't have specific information about how depression presents in children in the NHS documents provided to me. The documents I have focus on depression in adults, and they mention there is separate information about depression in children and young people, but those details aren't included in what I have access to.
+If you'd like to know about the signs and symptoms of depression in children, I can search for current NHS information on this topic for you. Would you like me to do that?
+Alternatively, I can provide you with information about the conditions that are covered for children in the documents I have - such as ADHD in children, autism in children, or dyslexia."
+
+CHILDREN_RESPONSE = "Key Signs and Symptoms
+Emotional Symptoms:
+
+Prolonged feelings of sadness or hopelessness NHS
+Irritability NHS 111 Wales
+Excessive feelings of guilt and low self-esteem NHS 111 Wales
+
+Behavioral Changes:
+
+Loss of interest in activities, friends or family NHS 111 Wales
+Inability to concentrate NHS 111 Wales
+Problem behaviour can be a sign of depression in children and young people NHS
+Withdrawal from home or school NHS
+
+Physical Symptoms:
+
+Physical symptoms, such as headaches and stomach aches NHS
+A marked change in appetite NHS 111 Wales
+Sleeping too little at night or too much during the day NHS 111 Wales
+Disturbances in sleep patterns and tiredness NHS
+
+School-Related Issues:
+
+Problems at school can be a sign of depression NHS
+
+Important Differences from Adults
+Depression may even masquerade as bad behaviour, particularly in boys Wikipedia, and mood is characteristically much more variable and less pervasive than in adults, and rapid mood swings often occur Wikipedia.
+Co-occurring Issues
+Some children have problems with anxiety as well as depression NHS, and older children who are depressed may misuse drugs or alcohol.
+When to Seek Help
+If you think your child may be depressed, or you're concerned about their general wellbeing, make an appointment with them to see a GP NHS. The GP can refer your child to specialist children and young people's mental health services if necessary."
+
+
 
 # Keywords for matching (lowercase)
 DYSLEXIA_KEYWORDS = ["dyslexia"]
 DYSPRAXIA_KEYWORDS = ["dyspraxia"]
+TRIGGER_KEYWORDS = ["trigger"]
+CHILDREN_KEYWORDS = ["children"]
 
 DEFAULT_RESPONSE = "I'm a simple chatbot with limited responses. Try asking me something else!"
 
