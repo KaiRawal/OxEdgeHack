@@ -136,35 +136,45 @@ Please answer the question based on the context provided. If the context doesn't
     
     return response.content[0].text
 
-# Initialize or load embeddings
-print("\n" + "="*50)
-index, documents, filenames = load_embeddings()
+if __name__ == "__main__":
+    # Initialize or load embeddings
+    print("\n" + "="*50)
+    index, documents, filenames = load_embeddings()
 
-if index is None:
-    print("No existing embeddings found. Creating new embeddings...")
-    index, documents, filenames = create_embeddings()
+    if index is None:
+        print("No existing embeddings found. Creating new embeddings...")
+        index, documents, filenames = create_embeddings()
+        
+        if index is None:
+            print("\nERROR: Failed to create embeddings!")
+            print("Please ensure:")
+            print("1. The /docs directory exists")
+            print("2. There are .txt files in /docs directory")
+            print("\nExiting...")
+            exit(1)
 
-print("="*50 + "\n")
+    print("="*50 + "\n")
+    print(f"✓ Successfully loaded {len(documents)} documents")
+    print("Starting Gradio interface...\n")
 
-# Create Gradio interface
-with gr.Blocks(title="RAG Chatbot") as demo:
-    gr.Markdown("# 📚 RAG Chatbot")
-    gr.Markdown("Ask questions about your documents. The chatbot will retrieve relevant context and answer using Claude.")
-    
-    chatbot = gr.Chatbot(height=500)
-    msg = gr.Textbox(label="Your Question", placeholder="Ask a question about your documents...")
-    clear = gr.Button("Clear")
-    
-    def respond(message, chat_history):
-        if not message.strip():
+    # Create Gradio interface
+    with gr.Blocks(title="RAG Chatbot") as demo:
+        gr.Markdown("# 📚 RAG Chatbot")
+        gr.Markdown("Ask questions about your documents. The chatbot will retrieve relevant context and answer using Claude.")
+        
+        chatbot = gr.Chatbot(height=500)
+        msg = gr.Textbox(label="Your Question", placeholder="Ask a question about your documents...")
+        clear = gr.Button("Clear")
+        
+        def respond(message, chat_history):
+            if not message.strip():
+                return "", chat_history
+            
+            bot_message = chat(message, chat_history, index, documents, filenames)
+            chat_history.append((message, bot_message))
             return "", chat_history
         
-        bot_message = chat(message, chat_history, index, documents, filenames)
-        chat_history.append((message, bot_message))
-        return "", chat_history
-    
-    msg.submit(respond, [msg, chatbot], [msg, chatbot])
-    clear.click(lambda: None, None, chatbot, queue=False)
+        msg.submit(respond, [msg, chatbot], [msg, chatbot])
+        clear.click(lambda: None, None, chatbot, queue=False)
 
-if __name__ == "__main__":
     demo.launch()
