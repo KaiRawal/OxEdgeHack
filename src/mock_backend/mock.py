@@ -5,6 +5,7 @@
 import gradio as gr
 import colorsys
 import html
+from mock_ui import global_css, header, favicon, description
 from fixed_text import (
     DYSLEXIA_RESPONSE,
     DYSLEXIA_RESPONSES,
@@ -68,10 +69,19 @@ def get_response_for_message(message: str) -> str:
     return format_response_obj(DEFAULT_RESPONSE)
 
 # Replace ChatInterface with Blocks-based UI that shows coloured HTML output
-with gr.Blocks(title=CHATBOT_TITLE) as demo:
-    gr.Markdown(f"### {CHATBOT_TITLE}\n\n{CHATBOT_DESCRIPTION}")
-    inp = gr.Textbox(label="Message", placeholder="Type your message...")
-    out = gr.HTML("<div style='font-family:system-ui,Arial;font-size:17px'>Responses will appear here.</div>")
+with gr.Blocks(
+    title=CHATBOT_TITLE,
+    theme=gr.themes.Soft(),
+    css=global_css()
+) as demo:
+
+    header()
+    favicon()
+
+    description(CHATBOT_DESCRIPTION)
+
+    inp = gr.Textbox(label="Message", placeholder="Ask me any health-related questions...")
+    out = gr.HTML("<div>Responses will appear here.</div>")
     btn = gr.Button("Send")
 
     def on_submit(message):

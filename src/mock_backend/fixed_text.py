@@ -97,6 +97,6 @@ EXAMPLE_PROMPTS = [
 # UI Configuration
 
 # UI Configuration
-CHATBOT_TITLE = "NHS Chatbot"
+CHATBOT_TITLE = "Chatbot"
 CHATBOT_DESCRIPTION = "ChatGPT does not understand healthcare well. Talk to me instead!"
 
